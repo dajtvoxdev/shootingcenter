@@ -82,7 +82,7 @@ jobs:
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
             
             # Stop and remove old containers
-            docker-compose down || true
+            docker compose down || true
             
             # Create docker-compose file
             cat > docker-compose.yml << 'EOF'
@@ -111,7 +111,7 @@ jobs:
             EOF
             
             # Start containers
-            docker-compose up -d
+            docker compose up -d
             
             # Cleanup
             docker system prune -f
