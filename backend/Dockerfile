@@ -15,8 +15,8 @@ COPY . .
 RUN mkdir -p /app/data /app/public/uploads /app/seed-data
 
 # Copy seed data to seed-data directory (will be synced to data on startup)
-COPY data/*.json /app/seed-data/ 2>/dev/null || true
-COPY public/images /app/public/images 2>/dev/null || true
+COPY data/*.json /app/seed-data/
+COPY public/images /app/public/images
 
 # List seed data for debugging
 RUN ls -la /app/seed-data/ && echo "--- Seed data copied ---"
