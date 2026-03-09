@@ -247,7 +247,7 @@ function Service() {
   }
 
   const getDaysInMonth = () => {
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay()
+    const firstDay = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
     const days = []
 
