@@ -1,16 +1,16 @@
 shootingcenter.click {
-    # API requests
-    route /api/* {
+    @api path /api/*
+    @media path /media/*
+    
+    handle @api {
         reverse_proxy backend:3001
     }
     
-    # Media files (images, uploads)
-    route /media/* {
+    handle @media {
         reverse_proxy backend:3001
     }
     
-    # All other requests go to frontend
-    route /* {
+    handle {
         reverse_proxy frontend:80
     }
 }
