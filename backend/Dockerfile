@@ -8,11 +8,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
+# Create data directory
+RUN mkdir -p /app/data /app/public/uploads
+
 # Copy source code
 COPY . .
 
-# Create data directory
-RUN mkdir -p /app/data /app/public/uploads
+# Ensure seed-data.js exists
+RUN ls -la /app/data/seed-data.js || echo "WARNING: seed-data.js not found"
 
 # Expose port
 EXPOSE 3001
