@@ -1,5 +1,6 @@
 const path = require('path');
 const { readJsonFile, writeJsonFile } = require('../utils/json-file');
+const seedData = require('../data/seed-data');
 
 const DATA_DIR = path.join(__dirname, '../data');
 
@@ -8,7 +9,13 @@ function getDataFilePath(filename) {
 }
 
 function loadData(filename, defaultValue) {
-  return readJsonFile(getDataFilePath(filename), defaultValue);
+  const data = readJsonFile(getDataFilePath(filename), defaultValue);
+  // Seed data if empty array or undefined
+  if (Array.isArray(data) && data.length === 0 && Array.isArray(defaultValue) && defaultValue.length > 0) {
+    saveData(filename, defaultValue);
+    return defaultValue;
+  }
+  return data;
 }
 
 function saveData(filename, data) {
@@ -123,11 +130,11 @@ function addBookedDate(year, month, day) {
 }
 
 function getEquipmentCategories() {
-  return loadData('equipment-categories.json', []);
+  return loadData('equipment-categories.json', seedData.defaultEquipmentCategories);
 }
 
 function getEquipmentItems() {
-  return loadData('equipment-items.json', []);
+  return loadData('equipment-items.json', seedData.defaultEquipmentItems);
 }
 
 function addEquipmentItem(item) {
@@ -138,12 +145,7 @@ function addEquipmentItem(item) {
 }
 
 function getServiceConfig() {
-  return loadData('service-config.json', {
-    galleryImages: [],
-    conceptOptions: [],
-    weekDays: [],
-    monthNames: []
-  });
+  return loadData('service-config.json', seedData.defaultServiceConfig);
 }
 
 module.exports = {
