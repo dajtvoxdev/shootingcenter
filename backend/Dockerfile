@@ -8,14 +8,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
-# Create data directory
-RUN mkdir -p /app/data /app/public/uploads
-
-# Copy source code
+# Copy source code (bao gồm cả public/images)
 COPY . .
 
-# Ensure seed-data.js exists
-RUN ls -la /app/data/seed-data.js || echo "WARNING: seed-data.js not found"
+# Create data và uploads directories
+RUN mkdir -p /app/data /app/public/uploads
+
+# List để debug
+RUN ls -la /app/public/ && ls -la /app/public/images/ | head -10
 
 # Expose port
 EXPOSE 3001
