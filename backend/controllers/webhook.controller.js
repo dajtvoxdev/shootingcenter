@@ -7,21 +7,48 @@ async function handleSepayWebhook(req, res, next) {
     const { content, transferAmount, transferType } = payload;
 
     if (transferType !== 'in') {
-      return res.json({ success: true });
+      return res.json({
+        success: true,
+        message: 'Webhook ignored: transferType is not "in".',
+        debug: {
+          transferType
+        }
+      });
     }
 
     const payment = storageService.findPaymentByTransactionCode(String(content || '').trim());
 
     if (!payment) {
-      return res.json({ success: true });
+      return res.json({
+        success: true,
+        message: 'Webhook ignored: no payment found for transaction code.',
+        debug: {
+          transactionCode: String(content || '').trim()
+        }
+      });
     }
 
     if (payment.status === 'paid') {
-      return res.json({ success: true });
+      return res.json({
+        success: true,
+        message: 'Webhook ignored: payment is already marked as paid.',
+        debug: {
+          paymentId: payment.id,
+          paymentStatus: payment.status
+        }
+      });
     }
 
     if (Number(transferAmount) < Number(payment.amountToPay)) {
-      return res.json({ success: true });
+      return res.json({
+        success: true,
+        message: 'Webhook ignored: transfer amount is less than required amount.',
+        debug: {
+          paymentId: payment.id,
+          transferAmount: Number(transferAmount),
+          amountToPay: Number(payment.amountToPay)
+        }
+      });
     }
 
     const paidAt = new Date().toISOString();
@@ -63,7 +90,15 @@ async function handleSepayWebhook(req, res, next) {
         });
     }
 
-    return res.json({ success: true });
+    return res.json({
+      success: true,
+      message: 'Webhook processed successfully.',
+      debug: {
+        paymentId: payment.id,
+        bookingId: payment.bookingId || null,
+        paidAt
+      }
+    });
   } catch (error) {
     return next(error);
   }
