@@ -114,15 +114,16 @@ networks:
 EOF
 
 # ============================================
-# 6. Configure Firewall (UFW)
+# 6. Configure Firewall (iptables for GCE)
 # ============================================
 echo "🔥 Configuring firewall..."
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw --force enable
+# GCE uses Google Cloud Firewall, but we ensure ports are open locally
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Save iptables rules (optional on GCE, but good practice)
+sudo apt-get install -y iptables-persistent || true
 
 # ============================================
 # 7. Install Fail2Ban (Security)
@@ -130,7 +131,7 @@ sudo ufw --force enable
 echo "🔒 Installing Fail2Ban..."
 sudo apt-get install -y fail2ban
 sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
+sudo systemctl start fail2ban || echo "Fail2Ban may need manual config on GCE"
 
 # ============================================
 # 8. Create Deploy Script
