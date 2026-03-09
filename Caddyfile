@@ -1,6 +1,11 @@
 shootingcenter.click {
-    # API requests - forward nguyên path đến backend
+    # API requests
     route /api/* {
+        reverse_proxy backend:3001
+    }
+    
+    # Media files (images, uploads)
+    route /media/* {
         reverse_proxy backend:3001
     }
     

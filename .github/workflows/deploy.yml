@@ -78,6 +78,10 @@ jobs:
                     reverse_proxy backend:3001
                 }
                 
+                route /media/* {
+                    reverse_proxy backend:3001
+                }
+                
                 route /* {
                     reverse_proxy frontend:80
                 }

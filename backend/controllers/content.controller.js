@@ -4,7 +4,8 @@ function toAbsoluteMediaUrl(req, value) {
   if (typeof value !== 'string' || value.length === 0) return value;
   if (/^https?:\/\//i.test(value)) return value;
   if (!value.startsWith('/')) return value;
-  return `${req.protocol}://${req.get('host')}${value}`;
+  // Return relative URL - let frontend/Caddy handle the domain
+  return value;
 }
 
 function getEquipmentCatalog(req, res, next) {
