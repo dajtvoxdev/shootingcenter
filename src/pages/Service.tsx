@@ -30,8 +30,14 @@ function Service() {
   const [selectedProject, setSelectedProject] = useState<ProjectType>('Quay trả file')
   const [selectedDuration, setSelectedDuration] = useState<DurationType>('Cả ngày(8-10 tiếng)')
 
-  const [galleryImages, setGalleryImages] = useState<string[]>([])
-  const [selectedImage, setSelectedImage] = useState<string>('')
+  // Default images from public folder as fallback
+  const defaultGalleryImages = [
+    '/assets/images/hero-image-1.png',
+    '/assets/images/hero-image-2.png', 
+    '/assets/images/hero-image-3.png'
+  ]
+  const [galleryImages, setGalleryImages] = useState<string[]>(defaultGalleryImages)
+  const [selectedImage, setSelectedImage] = useState<string>(defaultGalleryImages[0])
   const [conceptOptions, setConceptOptions] = useState<string[]>(['Chưa có', 'Đã có', 'Đang hoàn thiện, cần hỗ trợ'])
   const [weekDays, setWeekDays] = useState<string[]>(['Hai', 'Ba', 'Bốn', 'Năm', 'Sáu', 'Bảy', 'CN'])
   const [monthNames, setMonthNames] = useState<string[]>(['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'])
@@ -56,11 +62,13 @@ function Service() {
       .then((res) => {
         if (!res?.success) return
 
-        const images = Array.isArray(res.data?.galleryImages) ? res.data.galleryImages : []
-        if (images.length > 0) {
-          setGalleryImages(images)
-          setSelectedImage(images[0])
-        }
+        const apiImages = Array.isArray(res.data?.galleryImages) ? res.data.galleryImages : []
+        // Merge API images with default images (fill up to 3 images)
+        const mergedImages = apiImages.length > 0 
+          ? [...apiImages, ...defaultGalleryImages].slice(0, 3)
+          : defaultGalleryImages
+        setGalleryImages(mergedImages)
+        setSelectedImage(mergedImages[0])
 
         if (Array.isArray(res.data?.conceptOptions) && res.data.conceptOptions.length > 0) {
           setConceptOptions(res.data.conceptOptions)
@@ -481,15 +489,15 @@ function Service() {
                       {/* Image Gallery */}
                       <div className="detail-gallery">
                         <img
-                          src={selectedImage || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHN2ZyB4PSI1MCUiIHk9IjUwJSIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiM5OTkiPjxwYXRoIGQ9Ik0yMSAxOWw2LTZ2MTRoLTR6bS0xMiAwaDZ2LTRoLTZ6bS02IDBoNHYtNmgtNHptMTgtOGgtNnY2aDZ6bS0xMiAwaDZ2LTZoLTZ6bS02IDBoNHYtNGgtNHoiLz48L3N2Zz48L3N2Zz4='}
+                          src={selectedImage || defaultGalleryImages[0]}
                           alt="Main view"
                           className="gallery-main-img"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHN2ZyB4PSI1MCUiIHk9IjUwJSIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiM5OTkiPjxwYXRoIGQ9Ik0yMSAxOWw2LTZ2MTRoLTR6bS0xMiAwaDZ2LTRoLTZ6bS02IDBoNHYtNmgtNHptMTgtOGgtNnY2aDZ6bS0xMiAwaDZ2LTZoLTZ6bS02IDBoNHYtNGgtNHoiLz48L3N2Zz48L3N2Zz4='
+                            (e.target as HTMLImageElement).src = defaultGalleryImages[0]
                           }}
                         />
                         <div className="gallery-thumbnails">
-                          {galleryImages.length > 0 ? galleryImages.map((img, index) => (
+                          {galleryImages.map((img, index) => (
                             <img
                               key={index}
                               src={img}
@@ -497,17 +505,10 @@ function Service() {
                               className={`gallery-thumb ${selectedImage === img ? 'active' : ''}`}
                               onClick={() => setSelectedImage(img)}
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTBlMGUwIi8+PC9zdmc+'
+                                (e.target as HTMLImageElement).src = defaultGalleryImages[index % defaultGalleryImages.length]
                               }}
                             />
-                          )) : (
-                            <div className="gallery-thumb-placeholder" style={{ 
-                              width: '80px', 
-                              height: '60px', 
-                              background: '#e0e0e0',
-                              borderRadius: '4px'
-                            }}></div>
-                          )}
+                          ))}
                         </div>
                       </div>
 
