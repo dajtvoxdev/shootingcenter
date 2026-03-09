@@ -481,20 +481,33 @@ function Service() {
                       {/* Image Gallery */}
                       <div className="detail-gallery">
                         <img
-                          src={selectedImage}
+                          src={selectedImage || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHN2ZyB4PSI1MCUiIHk9IjUwJSIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiM5OTkiPjxwYXRoIGQ9Ik0yMSAxOWw2LTZ2MTRoLTR6bS0xMiAwaDZ2LTRoLTZ6bS02IDBoNHYtNmgtNHptMTgtOGgtNnY2aDZ6bS0xMiAwaDZ2LTZoLTZ6bS02IDBoNHYtNGgtNHoiLz48L3N2Zz48L3N2Zz4='}
                           alt="Main view"
                           className="gallery-main-img"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHN2ZyB4PSI1MCUiIHk9IjUwJSIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiM5OTkiPjxwYXRoIGQ9Ik0yMSAxOWw2LTZ2MTRoLTR6bS0xMiAwaDZ2LTRoLTZ6bS02IDBoNHYtNmgtNHptMTgtOGgtNnY2aDZ6bS0xMiAwaDZ2LTZoLTZ6bS02IDBoNHYtNGgtNHoiLz48L3N2Zz48L3N2Zz4='
+                          }}
                         />
                         <div className="gallery-thumbnails">
-                          {galleryImages.map((img, index) => (
+                          {galleryImages.length > 0 ? galleryImages.map((img, index) => (
                             <img
                               key={index}
                               src={img}
                               alt={`Thumbnail ${index + 1}`}
                               className={`gallery-thumb ${selectedImage === img ? 'active' : ''}`}
                               onClick={() => setSelectedImage(img)}
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTBlMGUwIi8+PC9zdmc+'
+                              }}
                             />
-                          ))}
+                          )) : (
+                            <div className="gallery-thumb-placeholder" style={{ 
+                              width: '80px', 
+                              height: '60px', 
+                              background: '#e0e0e0',
+                              borderRadius: '4px'
+                            }}></div>
+                          )}
                         </div>
                       </div>
 
