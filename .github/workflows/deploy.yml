@@ -74,25 +74,16 @@ jobs:
             # Create Caddyfile for SSL and reverse proxy
             cat > Caddyfile << 'EOF'
             shootingcenter.click {
-                @api {
-                    path /api/*
-                }
-                
-                handle @api {
+                route /api/* {
                     uri strip_prefix /api
                     reverse_proxy backend:3001 {
-                        header_up Host {host}
-                        header_up X-Real-IP {remote}
-                        header_up X-Forwarded-For {remote}
-                        header_up X-Forwarded-Proto {scheme}
+                        lb_try_duration 5s
+                        lb_try_interval 250ms
                     }
                 }
                 
-                reverse_proxy frontend:80 {
-                    header_up Host {host}
-                    header_up X-Real-IP {remote}
-                    header_up X-Forwarded-For {remote}
-                    header_up X-Forwarded-Proto {scheme}
+                route /* {
+                    reverse_proxy frontend:80
                 }
             }
             
@@ -164,9 +155,28 @@ jobs:
                 driver: bridge
             EOF
             
-            # Pull and deploy
+            # Pull latest images
             sudo docker compose pull
-            sudo docker compose up -d
+            
+            # Start backend first and wait for it to be healthy
+            echo "⏳ Starting backend..."
+            sudo docker compose up -d backend
+            sleep 5
+            
+            # Wait for backend to be ready
+            echo "⏳ Waiting for backend to be ready..."
+            for i in {1..30}; do
+              if sudo docker exec shootingcenter-backend wget -qO- http://localhost:3001/api/health >/dev/null 2>&1; then
+                echo "✅ Backend is ready!"
+                break
+              fi
+              echo "  Waiting... ($i/30)"
+              sleep 2
+            done
+            
+            # Start frontend and caddy
+            echo "⏳ Starting frontend and caddy..."
+            sudo docker compose up -d frontend caddy
             
             # Wait for Caddy to obtain SSL certificate
             echo "⏳ Waiting for SSL certificate..."
