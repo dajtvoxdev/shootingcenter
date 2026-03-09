@@ -5,7 +5,16 @@ const { generateEntityId } = require('../utils/id-generator');
 function isValidBookingDate(bookingDate) {
   if (!bookingDate || typeof bookingDate !== 'object') return false;
   const { day, month, year } = bookingDate;
-  return Number.isInteger(day) && Number.isInteger(month) && Number.isInteger(year);
+  return (
+    Number.isInteger(day) &&
+    Number.isInteger(month) &&
+    Number.isInteger(year) &&
+    day >= 1 &&
+    day <= 31 &&
+    month >= 1 &&
+    month <= 12 &&
+    year >= 2000
+  );
 }
 
 async function createBooking(req, res, next) {

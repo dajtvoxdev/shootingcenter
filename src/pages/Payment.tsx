@@ -92,7 +92,7 @@ function Payment() {
         }
     }
     const bookingDateLabel = booking
-        ? `${booking.bookingDate.day}/${booking.bookingDate.month + 1}/${booking.bookingDate.year}`
+        ? `${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}`
         : null
 
     const clearPolling = () => {

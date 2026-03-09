@@ -44,7 +44,7 @@ function Service() {
 
   useEffect(() => {
     bookingApi
-      .getBookedDates(currentYear, currentMonth)
+      .getBookedDates(currentYear, currentMonth + 1)
       .then((res) => {
         if (res.success) {
           setBookedDates(res.data.bookedDates || [])
@@ -54,6 +54,10 @@ function Service() {
         console.error('Failed to load booked dates:', error)
         setBookedDates([])
       })
+  }, [currentMonth, currentYear])
+
+  useEffect(() => {
+    setSelectedDate(null)
   }, [currentMonth, currentYear])
 
   useEffect(() => {
@@ -178,7 +182,7 @@ function Service() {
       conceptStatus: selectedConcept,
       bookingDate: {
         day: selectedDate,
-        month: currentMonth,
+        month: currentMonth + 1,
         year: currentYear
       },
       phoneNumber

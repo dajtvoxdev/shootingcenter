@@ -73,7 +73,7 @@ async function sendBookingNotification(booking) {
       <p><strong>Thời lượng:</strong> ${booking.duration || 'Không có'}</p>
       <p><strong>Ngân sách:</strong> ${formatCurrency(booking.budget.min)} - ${formatCurrency(booking.budget.max)}</p>
       <p><strong>Trạng thái concept:</strong> ${booking.conceptStatus}</p>
-      <p><strong>Ngày bắt đầu:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month + 1}/${booking.bookingDate.year}</p>
+      <p><strong>Ngày bắt đầu:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
       <p><strong>SĐT:</strong> ${booking.phoneNumber}</p>
       <p><strong>Thời gian tạo:</strong> ${new Date(booking.createdAt).toLocaleString('vi-VN')}</p>
     `
@@ -119,7 +119,7 @@ async function sendBookingConfirmedToAdmin(booking, payment) {
       <p><strong>Loại dự án:</strong> ${booking.projectType}</p>
       <p><strong>Thời lượng:</strong> ${booking.duration || 'Không có'}</p>
       <p><strong>Ngân sách:</strong> ${formatCurrency(booking.budget.min)} - ${formatCurrency(booking.budget.max)}</p>
-      <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month + 1}/${booking.bookingDate.year}</p>
+      <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
       <p><strong>SĐT khách:</strong> ${booking.phoneNumber}</p>
       <p><strong>Email khách:</strong> ${payment?.customerInfo?.email || 'Không có'}</p>
       <p><strong>Số tiền cọc:</strong> ${payment ? formatCurrency(payment.amountToPay) : 'N/A'}</p>
@@ -143,7 +143,7 @@ async function sendBookingConfirmedToCustomer(booking, payment) {
       <p>Cảm ơn bạn đã hoàn tất thanh toán cọc. Lịch của bạn đã được chốt thành công.</p>
       <p><strong>Mã booking:</strong> ${booking.id}</p>
       <p><strong>Dịch vụ:</strong> ${booking.projectType}</p>
-      <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month + 1}/${booking.bookingDate.year}</p>
+      <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
       <p><strong>Số tiền cọc:</strong> ${formatCurrency(payment.amountToPay)}</p>
       <p><strong>Thanh toán lúc:</strong> ${payment.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN') : 'N/A'}</p>
       <br>
