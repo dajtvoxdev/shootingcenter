@@ -1,5 +1,4 @@
 const storageService = require('../services/storage.service');
-const emailService = require('../services/email.service');
 const { generateEntityId } = require('../utils/id-generator');
 
 function isValidBookingDate(bookingDate) {
@@ -44,10 +43,6 @@ async function createBooking(req, res, next) {
     };
 
     storageService.addBooking(booking);
-
-    emailService.sendBookingNotification(booking).catch((err) => {
-      console.error('sendBookingNotification failed:', err.message);
-    });
 
     const depositAmount = Math.round((Number(payload?.budget?.min) || 0) * 0.25);
 
