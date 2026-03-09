@@ -1,0 +1,29 @@
+[
+  {
+    "id": "CT-20260222-001",
+    "name": "Đạt Võ",
+    "email": "dathp.proxy@gmail.com",
+    "subject": "Hello",
+    "message": "Xin chào",
+    "status": "new",
+    "createdAt": "2026-02-22T12:52:21.075Z"
+  },
+  {
+    "id": "CT-20260222-002",
+    "name": "Đạt Võ",
+    "email": "datvthe151388@gmail.com",
+    "subject": "Hello",
+    "message": "MẸ mày",
+    "status": "new",
+    "createdAt": "2026-02-22T12:53:31.068Z"
+  },
+  {
+    "id": "CT-20260222-003",
+    "name": "Dat Thành Đạt",
+    "email": "dathp.proxy@gmail.com",
+    "subject": "Hello",
+    "message": "hi",
+    "status": "new",
+    "createdAt": "2026-02-22T12:54:33.800Z"
+  }
+]

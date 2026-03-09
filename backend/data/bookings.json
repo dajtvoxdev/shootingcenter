@@ -1,0 +1,128 @@
+[
+  {
+    "id": "BK-20260222-001",
+    "service": "outdoor-studio",
+    "projectType": "Sản xuất video/MV",
+    "duration": null,
+    "budget": {
+      "min": 1000000,
+      "max": 100000000
+    },
+    "conceptStatus": "Đã có",
+    "bookingDate": {
+      "day": 12,
+      "month": 3,
+      "year": 2026
+    },
+    "phoneNumber": "0888718609",
+    "status": "pending",
+    "paymentId": null,
+    "createdAt": "2026-02-22T12:51:14.535Z",
+    "updatedAt": "2026-02-22T12:51:14.535Z"
+  },
+  {
+    "id": "BK-20260222-002",
+    "service": "production-house",
+    "projectType": "Sản xuất video/MV",
+    "duration": null,
+    "budget": {
+      "min": 1000000,
+      "max": 100000000
+    },
+    "conceptStatus": "Chưa có",
+    "bookingDate": {
+      "day": 24,
+      "month": 1,
+      "year": 2026
+    },
+    "phoneNumber": "0888718609",
+    "status": "pending",
+    "paymentId": null,
+    "createdAt": "2026-02-22T13:00:31.836Z",
+    "updatedAt": "2026-02-22T13:00:31.836Z"
+  },
+  {
+    "id": "BK-20260222-003",
+    "service": "outdoor-studio",
+    "projectType": "Quay trả file",
+    "duration": "Cả ngày(8-10 tiếng)",
+    "budget": {
+      "min": 1000000,
+      "max": 100000000
+    },
+    "conceptStatus": "Đang hoàn thiện, cần hỗ trợ",
+    "bookingDate": {
+      "day": 25,
+      "month": 1,
+      "year": 2026
+    },
+    "phoneNumber": "0123456789",
+    "status": "pending",
+    "paymentId": null,
+    "createdAt": "2026-02-22T13:01:51.563Z",
+    "updatedAt": "2026-02-22T13:01:51.563Z"
+  },
+  {
+    "id": "BK-20260301-001",
+    "service": "production-house",
+    "projectType": "Sản xuất video/MV",
+    "duration": null,
+    "budget": {
+      "min": 1000000,
+      "max": 100000000
+    },
+    "conceptStatus": "Đã có",
+    "bookingDate": {
+      "day": 31,
+      "month": 2,
+      "year": 2026
+    },
+    "phoneNumber": "0888718609",
+    "status": "confirmed",
+    "paymentId": "PAY-20260301-001",
+    "createdAt": "2026-03-01T13:19:32.729Z",
+    "updatedAt": "2026-03-01T13:42:12.206Z"
+  },
+  {
+    "id": "BK-20260301-002",
+    "service": "production-house",
+    "projectType": "TVC Quảng cáo",
+    "duration": null,
+    "budget": {
+      "min": 1000000,
+      "max": 1000000
+    },
+    "conceptStatus": "Chưa có",
+    "bookingDate": {
+      "day": 31,
+      "month": 2,
+      "year": 2026
+    },
+    "phoneNumber": "0888718609",
+    "status": "confirmed",
+    "paymentId": "PAY20260301006",
+    "createdAt": "2026-03-01T13:27:33.383Z",
+    "updatedAt": "2026-03-01T13:45:53.811Z"
+  },
+  {
+    "id": "BK-20260303-001",
+    "service": "production-house",
+    "projectType": "TVC Quảng cáo",
+    "duration": null,
+    "budget": {
+      "min": 1000000,
+      "max": 100000000
+    },
+    "conceptStatus": "Đã có",
+    "bookingDate": {
+      "day": 4,
+      "month": 2,
+      "year": 2026
+    },
+    "phoneNumber": "0888718609",
+    "status": "confirmed",
+    "paymentId": "PAY20260303001",
+    "createdAt": "2026-03-03T14:09:48.451Z",
+    "updatedAt": "2026-03-03T14:17:48.627Z"
+  }
+]

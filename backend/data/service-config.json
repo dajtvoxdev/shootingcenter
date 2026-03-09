@@ -1,0 +1,27 @@
+{
+  "galleryImages": [
+    "/media/images/hero-image-1.png",
+    "/media/images/hero-image-2.png",
+    "/media/images/hero-image-3.png"
+  ],
+  "conceptOptions": [
+    "Chưa có",
+    "Đã có",
+    "Đang hoàn thiện, cần hỗ trợ"
+  ],
+  "weekDays": ["Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy", "Chủ nhật"],
+  "monthNames": [
+    "Tháng 1",
+    "Tháng 2",
+    "Tháng 3",
+    "Tháng 4",
+    "Tháng 5",
+    "Tháng 6",
+    "Tháng 7",
+    "Tháng 8",
+    "Tháng 9",
+    "Tháng 10",
+    "Tháng 11",
+    "Tháng 12"
+  ]
+}

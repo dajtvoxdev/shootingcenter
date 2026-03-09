@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Camera",
+    "icon": "/media/images/equipment-camera-icon.png",
+    "iconSize": { "width": 82, "height": 76 }
+  },
+  {
+    "name": "Lens",
+    "icon": "/media/images/equipment-lens.png",
+    "iconSize": { "width": 85, "height": 85 }
+  },
+  {
+    "name": "Phụ kiện",
+    "icon": "/media/images/equipment-accessory.png",
+    "iconSize": { "width": 68, "height": 68 }
+  },
+  {
+    "name": "Thiết bị ánh sáng",
+    "icon": "/media/images/equipment-lighting.png",
+    "iconSize": { "width": 70, "height": 70 }
+  },
+  {
+    "name": "Thiết bị âm thanh",
+    "icon": "/media/images/equipment-microphone.png",
+    "iconSize": { "width": 74, "height": 74 }
+  },
+  {
+    "name": "Tripod/Gimbal",
+    "icon": "/media/images/equipment-tripod.png",
+    "iconSize": { "width": 72, "height": 72 }
+  },
+  {
+    "name": "Drone",
+    "icon": "/media/images/equipment-drone.png",
+    "iconSize": { "width": 62, "height": 62 }
+  }
+]

@@ -1,0 +1,332 @@
+[
+  {
+    "id": "PAY-20260301-001",
+    "bookingId": "BK-20260301-001",
+    "customerInfo": {
+      "fullName": "Đạt Võ",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking Sản xuất video/MV",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301001",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301001",
+    "status": "paid",
+    "sepayTransaction": {
+      "gateway": "TPBank",
+      "transactionDate": "2026-03-01 20:40:53",
+      "accountNumber": "03154896703",
+      "subAccount": null,
+      "code": "PAY20260301001",
+      "content": "PAY20260301001",
+      "transferType": "in",
+      "description": "BankAPINotify PAY20260301001",
+      "transferAmount": 250000,
+      "referenceCode": "663V501260612733",
+      "accumulated": 250000,
+      "id": 43744066
+    },
+    "sendEmailConfirmation": true,
+    "emailSent": true,
+    "createdAt": "2026-03-01T13:24:12.697Z",
+    "expiresAt": "2026-03-01T13:39:12.697Z",
+    "paidAt": "2026-03-01T13:42:12.205Z"
+  },
+  {
+    "id": "PAY-20260301-002",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301002",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301002",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:27:48.888Z",
+    "expiresAt": "2026-03-01T13:42:48.888Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY-20260301-003",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301003",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301003",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:28:30.548Z",
+    "expiresAt": "2026-03-01T13:43:30.548Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY-20260301-004",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301004",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301004",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:28:32.160Z",
+    "expiresAt": "2026-03-01T13:43:32.160Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY-20260301-005",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301005",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301005",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:28:32.706Z",
+    "expiresAt": "2026-03-01T13:43:32.706Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY6",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY6",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY6",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:39:21.337Z",
+    "expiresAt": "2026-03-01T13:54:21.337Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY7",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY7",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY7",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:39:22.644Z",
+    "expiresAt": "2026-03-01T13:54:22.644Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY20260301001",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301001",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301001",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-01T13:40:14.700Z",
+    "expiresAt": "2026-03-01T13:55:14.700Z",
+    "paidAt": null
+  },
+  {
+    "id": "PAY20260301006",
+    "bookingId": "BK-20260301-002",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260301006",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260301006",
+    "status": "paid",
+    "sepayTransaction": {
+      "gateway": "TPBank",
+      "transactionDate": "2026-03-01 20:45:52",
+      "accountNumber": "03154896703",
+      "subAccount": null,
+      "code": "PAY20260301006",
+      "content": "PAY20260301006",
+      "transferType": "in",
+      "description": "BankAPINotify PAY20260301006",
+      "transferAmount": 250000,
+      "referenceCode": "663V501260612753",
+      "accumulated": 500000,
+      "id": 43744595
+    },
+    "sendEmailConfirmation": true,
+    "emailSent": true,
+    "createdAt": "2026-03-01T13:45:34.444Z",
+    "expiresAt": "2026-03-01T14:00:34.444Z",
+    "paidAt": "2026-03-01T13:45:53.810Z"
+  },
+  {
+    "id": "PAY20260303001",
+    "bookingId": "BK-20260303-001",
+    "customerInfo": {
+      "fullName": "Võ Thành Đạt",
+      "email": "datvthe151388@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "Booking TVC Quảng cáo",
+        "price": 1000000
+      }
+    ],
+    "total": 1000000,
+    "depositRate": 0.25,
+    "amountToPay": 250000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260303001",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=03154896703&bank=TPBank&amount=250000&des=PAY20260303001",
+    "status": "paid",
+    "sepayTransaction": {
+      "paymentId": "PAY20260303001",
+      "devBypassValidation": true,
+      "__devBypassValidation": true
+    },
+    "sendEmailConfirmation": true,
+    "emailSent": true,
+    "createdAt": "2026-03-03T14:11:01.462Z",
+    "expiresAt": "2026-03-03T14:26:01.462Z",
+    "paidAt": "2026-03-03T14:17:48.626Z"
+  }
+]
