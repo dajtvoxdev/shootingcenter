@@ -75,11 +75,7 @@ jobs:
             cat > Caddyfile << 'EOF'
             shootingcenter.click {
                 route /api/* {
-                    uri strip_prefix /api
-                    reverse_proxy backend:3001 {
-                        lb_try_duration 5s
-                        lb_try_interval 250ms
-                    }
+                    reverse_proxy backend:3001
                 }
                 
                 route /* {
