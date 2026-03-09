@@ -568,17 +568,14 @@ function Service() {
                   <div className="service-cards">
                     <div className="service-card" onClick={() => handleCardClick('outdoor-studio')}>
                       <h3 className="service-card-title outdoor-studio">Outdoor Studio</h3>
-                      <p className="service-card-text">Biến mọi nơi thành studio</p>
                     </div>
 
                     <div className="service-card" onClick={() => handleCardClick('production-house')}>
                       <h3 className="service-card-title production-house">Production House</h3>
-                      <p className="service-card-text">Cùng bạn thực hiện ý tưởng</p>
                     </div>
 
                     <div className="service-card" onClick={() => handleCardClick('rental-house')}>
                       <h3 className="service-card-title rental-house">Rental House</h3>
-                      <p className="service-card-text">Hỗ trợ bạn về mặt thiết bị*</p>
                     </div>
                   </div>
 
