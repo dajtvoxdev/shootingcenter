@@ -8,14 +8,22 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy source code (bao gồm cả public/images)
+# Copy source code
 COPY . .
 
-# Create data và uploads directories
-RUN mkdir -p /app/data /app/public/uploads
+# Create directories
+RUN mkdir -p /app/data /app/public/uploads /app/seed-data
 
-# List để debug
-RUN ls -la /app/public/ && ls -la /app/public/images/ | head -10
+# Copy seed data to seed-data directory (will be synced to data on startup)
+COPY data/*.json /app/seed-data/ 2>/dev/null || true
+COPY public/images /app/public/images 2>/dev/null || true
+
+# List seed data for debugging
+RUN ls -la /app/seed-data/ && echo "--- Seed data copied ---"
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose port
 EXPOSE 3001
@@ -24,5 +32,5 @@ EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3001/api/health', (r) => r.statusCode === 200 ? process.exit(0) : process.exit(1))"
 
-# Start the server
-CMD ["node", "server.js"]
+# Use entrypoint to sync data before starting
+ENTRYPOINT ["docker-entrypoint.sh"]
