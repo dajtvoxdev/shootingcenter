@@ -74,11 +74,13 @@ jobs:
             # Create Caddyfile for SSL and reverse proxy
             cat > Caddyfile << 'EOF'
             shootingcenter.click {
+                # Handle API requests first
+                handle_path /api/* {
+                    reverse_proxy backend:3001
+                }
+                
+                # Everything else goes to frontend
                 reverse_proxy frontend:80
-            }
-            
-            shootingcenter.click/api/* {
-                reverse_proxy backend:3001
             }
             
             www.shootingcenter.click {
