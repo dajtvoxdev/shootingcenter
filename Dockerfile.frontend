@@ -12,7 +12,10 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the app
+# Build the app with API URL
+# When behind reverse proxy (Caddy/Nginx), use relative /api path
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=${VITE_API_URL}
 ENV NODE_ENV=production
 RUN npx vite build
 

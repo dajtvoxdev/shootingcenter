@@ -1,4 +1,8 @@
+// API base URL - use environment variable or default to /api for reverse proxy
 const API_BASE = import.meta.env.VITE_API_URL || '/api'
+
+// Log để debug
+console.log('API_BASE:', API_BASE)
 
 export interface BookingRequest {
   service: string
