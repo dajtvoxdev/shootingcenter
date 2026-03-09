@@ -1,29 +1,16 @@
 const storageService = require('../services/storage.service');
 const emailService = require('../services/email.service');
-const config = require('../config');
 
 async function handleSepayWebhook(req, res, next) {
   try {
     const payload = req.body || {};
     const { content, transferAmount, transferType } = payload;
 
-    const isDevBypass =
-      config.env === 'development' &&
-      (payload.devBypassValidation === true || payload.forcePaid === true);
-
-    if (!isDevBypass && transferType !== 'in') {
+    if (transferType !== 'in') {
       return res.json({ success: true });
     }
 
-    let payment = null;
-
-    if (isDevBypass && payload.paymentId) {
-      payment = storageService.findPaymentById(String(payload.paymentId).trim());
-    }
-
-    if (!payment) {
-      payment = storageService.findPaymentByTransactionCode(String(content || '').trim());
-    }
+    const payment = storageService.findPaymentByTransactionCode(String(content || '').trim());
 
     if (!payment) {
       return res.json({ success: true });
@@ -33,7 +20,7 @@ async function handleSepayWebhook(req, res, next) {
       return res.json({ success: true });
     }
 
-    if (!isDevBypass && Number(transferAmount) < Number(payment.amountToPay)) {
+    if (Number(transferAmount) < Number(payment.amountToPay)) {
       return res.json({ success: true });
     }
 
@@ -41,10 +28,7 @@ async function handleSepayWebhook(req, res, next) {
     const updatedPayment = storageService.updatePayment(payment.id, {
       status: 'paid',
       paidAt,
-      sepayTransaction: {
-        ...payload,
-        __devBypassValidation: isDevBypass
-      }
+      sepayTransaction: payload
     });
 
     if (payment.bookingId) {
