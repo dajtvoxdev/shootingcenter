@@ -1,4 +1,4 @@
-name: Build and Push Docker Images
+name: Build, Push and Deploy to VPS
 
 on:
   push:
@@ -54,3 +54,64 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Create app directory
+            mkdir -p ~/shootingcenter
+            cd ~/shootingcenter
+            
+            # Create docker-compose file
+            cat > docker-compose.yml << 'EOF'
+            version: '3.8'
+            
+            services:
+              frontend:
+                image: ghcr.io/dajtvoxdev/shootingcenter-frontend:latest
+                container_name: shootingcenter-frontend
+                ports:
+                  - "80:80"
+                restart: unless-stopped
+                depends_on:
+                  - backend
+                networks:
+                  - shootingcenter-network
+            
+              backend:
+                image: ghcr.io/dajtvoxdev/shootingcenter-backend:latest
+                container_name: shootingcenter-backend
+                ports:
+                  - "3001:3001"
+                environment:
+                  - NODE_ENV=production
+                  - PORT=3001
+                volumes:
+                  - ./backend-data:/app/data
+                  - ./backend-uploads:/app/public/uploads
+                restart: unless-stopped
+                networks:
+                  - shootingcenter-network
+            
+            networks:
+              shootingcenter-network:
+                driver: bridge
+            EOF
+            
+            # Pull and deploy
+            sudo docker compose pull
+            sudo docker compose up -d
+            
+            # Cleanup
+            sudo docker system prune -f
+            
+            echo "✅ Deployment completed!"
