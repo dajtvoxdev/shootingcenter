@@ -5,7 +5,7 @@ dotenv.config();
 module.exports = {
   env: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT || '3001', 10),
-  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5173',
+  frontendUrl: process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'http://localhost:5173',
   sepay: {
     bankCode: process.env.SEPAY_BANK_CODE || 'MB',
     account: process.env.SEPAY_ACCOUNT || '',

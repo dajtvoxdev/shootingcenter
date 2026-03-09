@@ -71,36 +71,78 @@ jobs:
             mkdir -p ~/shootingcenter
             cd ~/shootingcenter
             
-            # Create docker-compose file
+            # Create Caddyfile for SSL and reverse proxy
+            cat > Caddyfile << 'EOF'
+            shootingcenter.click {
+                reverse_proxy frontend:80
+            }
+            
+            shootingcenter.click/api/* {
+                reverse_proxy backend:3001
+            }
+            
+            www.shootingcenter.click {
+                redir https://shootingcenter.click{uri}
+            }
+            EOF
+            
+            # Create docker-compose file for production
             cat > docker-compose.yml << 'EOF'
             version: '3.8'
             
             services:
+              caddy:
+                image: caddy:2-alpine
+                container_name: shootingcenter-caddy
+                ports:
+                  - "80:80"
+                  - "443:443"
+                  - "443:443/udp"
+                volumes:
+                  - ./Caddyfile:/etc/caddy/Caddyfile
+                  - caddy_data:/data
+                  - caddy_config:/config
+                restart: unless-stopped
+                depends_on:
+                  - frontend
+                  - backend
+                networks:
+                  - shootingcenter-network
+            
               frontend:
                 image: ghcr.io/dajtvoxdev/shootingcenter-frontend:latest
                 container_name: shootingcenter-frontend
-                ports:
-                  - "80:80"
+                expose:
+                  - "80"
                 restart: unless-stopped
-                depends_on:
-                  - backend
                 networks:
                   - shootingcenter-network
             
               backend:
                 image: ghcr.io/dajtvoxdev/shootingcenter-backend:latest
                 container_name: shootingcenter-backend
-                ports:
-                  - "3001:3001"
+                expose:
+                  - "3001"
                 environment:
                   - NODE_ENV=production
                   - PORT=3001
+                  - CORS_ORIGIN=https://shootingcenter.click,http://34.124.192.94
                 volumes:
                   - ./backend-data:/app/data
                   - ./backend-uploads:/app/public/uploads
                 restart: unless-stopped
                 networks:
                   - shootingcenter-network
+                healthcheck:
+                  test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/api/health"]
+                  interval: 30s
+                  timeout: 10s
+                  retries: 3
+                  start_period: 40s
+            
+            volumes:
+              caddy_data:
+              caddy_config:
             
             networks:
               shootingcenter-network:
@@ -111,7 +153,16 @@ jobs:
             sudo docker compose pull
             sudo docker compose up -d
             
+            # Wait for Caddy to obtain SSL certificate
+            echo "⏳ Waiting for SSL certificate..."
+            sleep 10
+            
+            # Show status
+            sudo docker ps
+            
             # Cleanup
             sudo docker system prune -f
             
             echo "✅ Deployment completed!"
+            echo "🌐 Website: https://shootingcenter.click"
+            echo "🔌 API: https://shootingcenter.click/api/"
