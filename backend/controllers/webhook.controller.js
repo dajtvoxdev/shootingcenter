@@ -1,10 +1,29 @@
 const storageService = require('../services/storage.service');
 const emailService = require('../services/email.service');
 
+function collectCandidateTransactionCodes(payload) {
+  const candidates = new Set();
+  const directValues = [payload.code, payload.content, payload.description, payload.referenceCode];
+
+  for (const value of directValues) {
+    const normalized = String(value || '').trim();
+    if (normalized) {
+      candidates.add(normalized);
+    }
+
+    const matches = normalized.match(/PAY\d+/g) || [];
+    for (const match of matches) {
+      candidates.add(match.trim());
+    }
+  }
+
+  return Array.from(candidates);
+}
+
 async function handleSepayWebhook(req, res, next) {
   try {
     const payload = req.body || {};
-    const { content, transferAmount, transferType } = payload;
+    const { transferAmount, transferType } = payload;
 
     if (transferType !== 'in') {
       return res.json({
@@ -16,14 +35,20 @@ async function handleSepayWebhook(req, res, next) {
       });
     }
 
-    const payment = storageService.findPaymentByTransactionCode(String(content || '').trim());
+    const candidateTransactionCodes = collectCandidateTransactionCodes(payload);
+    const matchedTransactionCode = candidateTransactionCodes.find((code) =>
+      storageService.findPaymentByTransactionCode(code)
+    );
+    const payment = matchedTransactionCode
+      ? storageService.findPaymentByTransactionCode(matchedTransactionCode)
+      : null;
 
     if (!payment) {
       return res.json({
         success: true,
         message: 'Webhook ignored: no payment found for transaction code.',
         debug: {
-          transactionCode: String(content || '').trim()
+          candidates: candidateTransactionCodes
         }
       });
     }
@@ -33,6 +58,7 @@ async function handleSepayWebhook(req, res, next) {
         success: true,
         message: 'Webhook ignored: payment is already marked as paid.',
         debug: {
+          matchedTransactionCode,
           paymentId: payment.id,
           paymentStatus: payment.status
         }
@@ -44,6 +70,7 @@ async function handleSepayWebhook(req, res, next) {
         success: true,
         message: 'Webhook ignored: transfer amount is less than required amount.',
         debug: {
+          matchedTransactionCode,
           paymentId: payment.id,
           transferAmount: Number(transferAmount),
           amountToPay: Number(payment.amountToPay)
@@ -94,6 +121,7 @@ async function handleSepayWebhook(req, res, next) {
       success: true,
       message: 'Webhook processed successfully.',
       debug: {
+        matchedTransactionCode,
         paymentId: payment.id,
         bookingId: payment.bookingId || null,
         paidAt
