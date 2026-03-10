@@ -52,6 +52,7 @@ function Home() {
               <img src="/assets/images/trusted-2.png" alt="FPT Education" className="hero-trusted-logo" />
               <img src="/assets/images/trusted-3.png" alt="HSB" className="hero-trusted-logo" />
               <img src="/assets/images/trusted-4.png" alt="FMUC" className="hero-trusted-logo" />
+              <img src="/assets/images/trusted-5.png" alt="FMUC" className="hero-trusted-logo" />
             </div>
           </div>
         </section>
@@ -164,7 +165,7 @@ function Home() {
           </h2>
           <div className="team-content">
             <div className="team-image">
-              <div className="team-image-placeholder"></div>
+              <img src="/assets/images/team.png" alt="Shooting Center team" className="team-image-placeholder" />
             </div>
             <div className="team-text">
               <p className="team-description">

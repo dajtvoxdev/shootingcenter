@@ -543,12 +543,13 @@
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.03em;
+  padding: 8px 15px;
+  border-radius: 10px;
   color: #FFFFFF;
-  background: transparent;
+  background: #ffffff70;
   border: none;
   text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  padding: 0;
   transition: opacity 0.3s;
 }
 
@@ -962,7 +963,8 @@
 }
 
 .service-card-title {
-  font-size: 40px;
+  font-size: 32px;
+  white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.22;
@@ -1000,7 +1002,7 @@
   color: #949494;
   margin: 20px 0 0 0;
   text-align: left;
-  max-width: 850px;
+  width: 100%;
 }
 
 .service-back-button {
@@ -1635,6 +1637,13 @@
   gap: 40px;
 }
 
+.equipment-topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
 .equipment-title {
   font-size: 36px;
   font-weight: 400;
@@ -1655,6 +1664,54 @@
   max-width: 1201px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.equipment-cart-btn {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(245, 244, 247, 0.9);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.equipment-cart-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.14);
+}
+
+.equipment-cart-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.equipment-cart-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.equipment-cart-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
 }
 
 .equipment-category-btn {
@@ -1767,6 +1824,13 @@
   justify-content: space-between;
 }
 
+.equipment-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .equipment-name {
   font-size: 24px;
   font-weight: 700;
@@ -1792,6 +1856,35 @@
   line-height: 1.22;
   color: #000000;
   margin: 0;
+}
+
+.equipment-add-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: #111111;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  line-height: 1;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.equipment-add-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.2);
+}
+
+.equipment-selected-note {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4f8a5b;
 }
 
 .equipment-pay-btn {
@@ -1834,7 +1927,7 @@
   letter-spacing: 0.01em;
   line-height: 1.22;
   color: #949494;
-  text-align: center;
+  text-align: left;
   margin: 40px 0 0 0;
 }
 
@@ -1964,6 +2057,11 @@
 
   .equipment-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .equipment-topbar {
+    flex-direction: column;
+    align-items: center;
   }
 
   .equipment-categories {
@@ -2222,9 +2320,25 @@
     padding: 20px 15px;
   }
 
+  .equipment-topbar {
+    align-items: stretch;
+  }
+
   .equipment-categories {
     gap: 15px;
     flex-wrap: wrap;
+  }
+
+  .equipment-cart-btn {
+    align-self: flex-end;
+    width: 72px;
+    height: 72px;
+    border-radius: 24px;
+  }
+
+  .equipment-cart-icon {
+    width: 34px;
+    height: 34px;
   }
 
   .equipment-category-btn {
@@ -2250,10 +2364,9 @@
     text-align: center;
   }
 
-  .equipment-pay-btn {
-    align-self: center;
+  .equipment-card-footer {
+    flex-direction: column;
     width: 100%;
-    max-width: 240px;
   }
 
   .equipment-image-container {
@@ -2273,6 +2386,12 @@
 
   .equipment-price {
     font-size: 24px;
+  }
+
+  .equipment-add-btn {
+    width: 100%;
+    max-width: 240px;
+    border-radius: 999px;
   }
 
   .equipment-booking-btn {

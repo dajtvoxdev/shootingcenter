@@ -5,6 +5,26 @@ const { formatCurrency } = require('../utils/formatters');
 const FROM = `"Shooting Center" <${config.email.user || 'shootingteam@gmail.com'}>`;
 const ADMIN = config.email.admin;
 
+function formatServicesHtml(services = []) {
+  if (!Array.isArray(services) || services.length === 0) {
+    return '<p><strong>Hạng mục thanh toán:</strong> Không có</p>';
+  }
+
+  const items = services
+    .map((service) => `<li>${service.name}: ${formatCurrency(Number(service.price) || 0)}</li>`)
+    .join('');
+
+  return `
+    <p><strong>Hạng mục thanh toán:</strong></p>
+    <ul>${items}</ul>
+  `;
+}
+
+function formatAdditionalInfoHtml(payment) {
+  const note = payment?.customerInfo?.additionalInfo;
+  return `<p><strong>Ghi chú thêm:</strong> ${note ? note : 'Không có'}</p>`;
+}
+
 async function sendContactToAdmin(contact) {
   if (!ADMIN) {
     throw new Error('ADMIN_EMAIL is missing');
@@ -91,7 +111,8 @@ async function sendPaymentConfirmation(payment) {
       <p>Cảm ơn bạn đã thanh toán. Dưới đây là thông tin đơn hàng:</p>
       <p><strong>Mã thanh toán:</strong> ${payment.id}</p>
       <p><strong>Số tiền:</strong> ${formatCurrency(payment.amountToPay)}</p>
-      <p><strong>Dịch vụ:</strong> ${payment.services.map((s) => s.name).join(', ')}</p>
+      ${formatServicesHtml(payment.services)}
+      ${formatAdditionalInfoHtml(payment)}
       <p><strong>Thời gian:</strong> ${new Date(payment.paidAt).toLocaleString('vi-VN')}</p>
       <br>
       <p>Chúng tôi sẽ liên hệ với bạn sớm để xác nhận chi tiết.</p>
@@ -122,6 +143,8 @@ async function sendBookingConfirmedToAdmin(booking, payment) {
       <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
       <p><strong>SĐT khách:</strong> ${booking.phoneNumber}</p>
       <p><strong>Email khách:</strong> ${payment?.customerInfo?.email || 'Không có'}</p>
+      ${formatServicesHtml(payment?.services)}
+      ${formatAdditionalInfoHtml(payment)}
       <p><strong>Số tiền cọc:</strong> ${payment ? formatCurrency(payment.amountToPay) : 'N/A'}</p>
       <p><strong>Thời gian thanh toán:</strong> ${payment?.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN') : 'N/A'}</p>
     `
@@ -144,6 +167,8 @@ async function sendBookingConfirmedToCustomer(booking, payment) {
       <p><strong>Mã booking:</strong> ${booking.id}</p>
       <p><strong>Dịch vụ:</strong> ${booking.projectType}</p>
       <p><strong>Ngày quay:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
+      ${formatServicesHtml(payment?.services)}
+      ${formatAdditionalInfoHtml(payment)}
       <p><strong>Số tiền cọc:</strong> ${formatCurrency(payment.amountToPay)}</p>
       <p><strong>Thanh toán lúc:</strong> ${payment.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN') : 'N/A'}</p>
       <br>

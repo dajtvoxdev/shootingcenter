@@ -66,15 +66,19 @@ async function createPayment(req, res, next) {
 
     if (booking) {
       const bookingBudgetMin = Number(booking?.budget?.min) || 0;
-      if (bookingBudgetMin > 0) {
-        total = bookingBudgetMin;
-      }
 
       if (services.length === 0) {
         services = [{
           name: `Booking ${booking.projectType || booking.service || booking.id}`,
-          price: total
+          price: bookingBudgetMin
         }];
+        total = bookingBudgetMin;
+      } else {
+        total = calculateTotal(services);
+      }
+
+      if (total <= 0 && bookingBudgetMin > 0) {
+        total = bookingBudgetMin;
       }
     }
 
