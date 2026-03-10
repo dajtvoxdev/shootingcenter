@@ -211,6 +211,7 @@
   height: 80px;
   object-fit: contain;
   opacity: 0.78;
+  filter: grayscale(100%);
 }
 
 /* Hero Images */
