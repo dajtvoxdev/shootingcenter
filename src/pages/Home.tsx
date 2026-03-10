@@ -177,8 +177,8 @@ function Home() {
               </p>
             </div>
           </div>
-          <h2 className="section-title team-title">our team</h2>
-          <p className="team-tagline">filmmakers, photographers, creative</p>
+          <h2 className="section-title team-title">OUR TEAM</h2>
+          <p className="team-tagline">Filmmakers, Photographers, Creative</p>
         </section>
       </div>
 

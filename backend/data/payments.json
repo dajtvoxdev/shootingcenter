@@ -328,5 +328,35 @@
     "createdAt": "2026-03-03T14:11:01.462Z",
     "expiresAt": "2026-03-03T14:26:01.462Z",
     "paidAt": "2026-03-03T14:17:48.626Z"
+  },
+  {
+    "id": "PAY20260310001",
+    "bookingId": null,
+    "customerInfo": {
+      "fullName": "Dat Thành Đạt",
+      "email": "dathp.proxy@gmail.com",
+      "phone": "0888718609",
+      "additionalInfo": ""
+    },
+    "services": [
+      {
+        "name": "SONY ALPHA FX3 x1",
+        "price": 800000
+      }
+    ],
+    "total": 800000,
+    "depositRate": 0.25,
+    "amountToPay": 200000,
+    "paymentMethod": "bank",
+    "paymentType": "deposit",
+    "transactionCode": "PAY20260310001",
+    "qrCodeUrl": "https://qr.sepay.vn/img?acc=811520038888&bank=MBBank&amount=200000&des=PAY20260310001",
+    "status": "pending",
+    "sepayTransaction": null,
+    "sendEmailConfirmation": true,
+    "emailSent": false,
+    "createdAt": "2026-03-10T03:11:22.834Z",
+    "expiresAt": "2026-03-10T03:26:22.834Z",
+    "paidAt": null
   }
 ]
