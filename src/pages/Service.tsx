@@ -727,11 +727,11 @@ function Service() {
                   <p className="service-description">Chúng tôi sẽ giúp bạn đưa ra phương án phù hợp nhất.</p>
 
                   <div className="service-cards">
-                    <div className="service-card" onClick={() => handleCardClick('outdoor-studio')}>
+                    <div className="service-card" onClick={() => handleCardClick('production-house')}>
                       <h3 className="service-card-title outdoor-studio">Outdoor Studio</h3>
                     </div>
 
-                    <div className="service-card" onClick={() => handleCardClick('production-house')}>
+                    <div className="service-card" onClick={() => handleCardClick('outdoor-studio')}>
                       <h3 className="service-card-title production-house">Production House</h3>
                     </div>
 
