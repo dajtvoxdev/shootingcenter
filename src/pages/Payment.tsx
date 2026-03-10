@@ -94,7 +94,11 @@ function getInitialEquipmentCart(): EquipmentCartItem[] {
 function Payment() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const bookingIdFromQuery = searchParams.get('bookingId') || sessionStorage.getItem('bookingId')
+  const paymentSource = searchParams.get('source')
+  const bookingIdFromQuery =
+    paymentSource === 'equipment-cart'
+      ? null
+      : searchParams.get('bookingId') || sessionStorage.getItem('bookingId')
   const [paymentMethod, setPaymentMethod] = useState<'bank' | 'momo'>('bank')
   const [formData, setFormData] = useState({
     fullName: '',
