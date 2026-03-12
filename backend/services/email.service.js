@@ -95,7 +95,7 @@ async function sendBookingNotification(booking) {
       <p><strong>Trạng thái concept:</strong> ${booking.conceptStatus}</p>
       <p><strong>Ngày bắt đầu:</strong> ${booking.bookingDate.day}/${booking.bookingDate.month}/${booking.bookingDate.year}</p>
       <p><strong>SĐT:</strong> ${booking.phoneNumber}</p>
-      <p><strong>Thời gian tạo:</strong> ${new Date(booking.createdAt).toLocaleString('vi-VN')}</p>
+      <p><strong>Thời gian tạo:</strong> ${new Date(booking.createdAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}</p>
     `
   });
 }
@@ -113,7 +113,7 @@ async function sendPaymentConfirmation(payment) {
       <p><strong>Số tiền:</strong> ${formatCurrency(payment.amountToPay)}</p>
       ${formatServicesHtml(payment.services)}
       ${formatAdditionalInfoHtml(payment)}
-      <p><strong>Thời gian:</strong> ${new Date(payment.paidAt).toLocaleString('vi-VN')}</p>
+      <p><strong>Thời gian:</strong> ${new Date(payment.paidAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}</p>
       <br>
       <p>Chúng tôi sẽ liên hệ với bạn sớm để xác nhận chi tiết.</p>
       <br>
@@ -146,7 +146,7 @@ async function sendBookingConfirmedToAdmin(booking, payment) {
       ${formatServicesHtml(payment?.services)}
       ${formatAdditionalInfoHtml(payment)}
       <p><strong>Số tiền cọc:</strong> ${payment ? formatCurrency(payment.amountToPay) : 'N/A'}</p>
-      <p><strong>Thời gian thanh toán:</strong> ${payment?.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN') : 'N/A'}</p>
+      <p><strong>Thời gian thanh toán:</strong> ${payment?.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : 'N/A'}</p>
     `
   });
 }
@@ -170,7 +170,7 @@ async function sendBookingConfirmedToCustomer(booking, payment) {
       ${formatServicesHtml(payment?.services)}
       ${formatAdditionalInfoHtml(payment)}
       <p><strong>Số tiền cọc:</strong> ${formatCurrency(payment.amountToPay)}</p>
-      <p><strong>Thanh toán lúc:</strong> ${payment.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN') : 'N/A'}</p>
+      <p><strong>Thanh toán lúc:</strong> ${payment.paidAt ? new Date(payment.paidAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : 'N/A'}</p>
       <br>
       <p>Đội ngũ Shooting Center sẽ liên hệ để xác nhận chi tiết triển khai.</p>
       <br>

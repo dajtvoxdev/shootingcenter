@@ -6,7 +6,7 @@ function formatCurrency(amount) {
 }
 
 function formatDate(dateInput) {
-  return new Date(dateInput).toLocaleString('vi-VN');
+  return new Date(dateInput).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
 }
 
 module.exports = {
