@@ -3,20 +3,33 @@ import '../App.css'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import ContactForm from '../components/ContactForm'
+import VideoModal from '../components/VideoModal'
 
 const workProjects = [
-  { title: 'ME.AI25', image: '/assets/images/work-project-1.png' },
-  { title: 'Giải Vô Địch Muay', image: '/assets/images/work-project-2.png' },
-  { title: 'Cuộc Dạo Chơi', image: '/assets/images/work-project-3.svg' },
-  { title: 'Mây Tre Đan Phú Vinh', image: '/assets/images/work-project-4.png' },
-  { title: 'DÂU TẰM - DANCE', image: '/assets/images/work-project-5.png' },
-  { title: 'Định Luật Bảo Toàn', image: '/assets/images/work-project-6.png' },
-  { title: 'Mùa Hè Của Em', image: '/assets/images/work-project-7.svg' },
-  { title: 'Wedding Khải - Lan', image: '/assets/images/work-project-8.png' }
+  { title: 'ME.AI25', image: '/assets/images/work-project-1.png', videoUrl: 'https://youtu.be/dGgwqZhmJl4?si=vmNInISpPfwc7QQT' },
+  { title: 'Giải Vô Địch Muay', image: '/assets/images/work-project-2.png', videoUrl: 'https://www.facebook.com/reel/1137882121340299' },
+  { title: 'Cuộc Dạo Chơi', image: '/assets/images/work-project-3.svg', videoUrl: 'https://youtu.be/JGG1ZccdnC8?si=Chp0aFx5cEHBQrag' },
+  { title: 'Mây Tre Đan Phú Vinh', image: '/assets/images/work-project-4.png', videoUrl: 'https://youtu.be/-krF5YuutFs?si=L2klskfSlOHE7Mg7' },
+  { title: 'DÂU TẰM - DANCE', image: '/assets/images/work-project-5.png', videoUrl: 'https://youtu.be/9inFMPWSGXw?si=wyZqm6lZnYa0FulJ' },
+  { title: 'Định Luật Bảo Toàn', image: '/assets/images/work-project-6.png', videoUrl: 'https://youtu.be/tiYeReSjedA?si=TP5yeFhPYn6USqti' },
+  { title: 'Mùa Hè Củ Em', image: '/assets/images/work-project-7.svg', videoUrl: 'https://youtu.be/jR0FNFEg-dI?si=j5rrQVskEV8-vs0s' },
+  { title: 'Wedding Khải - Lan', image: '/assets/images/work-project-8.png', videoUrl: 'https://youtu.be/rFI1p5F5n9Q?si=b1D2xN2T6Fuh7BTF' }
 ]
 
 function Work() {
   const [showContactModal, setShowContactModal] = useState(false)
+  const [showVideoModal, setShowVideoModal] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<{ title: string; videoUrl: string } | null>(null)
+
+  const handleOpenVideo = (project: { title: string; videoUrl: string }) => {
+    setSelectedProject(project)
+    setShowVideoModal(true)
+  }
+
+  const handleCloseVideo = () => {
+    setShowVideoModal(false)
+    setSelectedProject(null)
+  }
 
   return (
     <>
@@ -35,7 +48,12 @@ function Work() {
                     <span className="project-tag">Photo/Video</span>
                     <div className="project-bottom">
                       <h4 className="project-name">{project.title}</h4>
-                      <button className="project-button">View Project</button>
+                      <button
+                        className="project-button"
+                        onClick={() => handleOpenVideo(project)}
+                      >
+                        View Project
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -73,6 +91,14 @@ function Work() {
           </div>
         </div>
       )}
+
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={showVideoModal}
+        onClose={handleCloseVideo}
+        videoUrl={selectedProject?.videoUrl || ''}
+        title={selectedProject?.title || ''}
+      />
 
       <Footer />
     </>

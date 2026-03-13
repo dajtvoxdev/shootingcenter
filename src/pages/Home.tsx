@@ -1,12 +1,48 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../App.css'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import ContactForm from '../components/ContactForm'
+import VideoModal from '../components/VideoModal'
+
+const homeProjects = [
+  {
+    title: 'Đừng Đến - Short Film',
+    image: '/assets/images/project-1.png',
+    videoUrl: 'https://youtu.be/7nn6weUGU08?si=cvpZHbNY_HP2PFMu'
+  },
+  {
+    title: 'Mùa Hè Củ Em - MV',
+    image: '/assets/images/project-2.png',
+    videoUrl: 'https://youtu.be/jR0FNFEg-dI?si=j5rrQVskEV8-vs0s'
+  },
+  {
+    title: 'Giấy Trắng - Short Film',
+    image: '/assets/images/project-3.png',
+    videoUrl: 'https://youtu.be/ay8yMEFoNJw?si=PgS4L3UdYk31YYx9'
+  },
+  {
+    title: 'Mây Tre Đan',
+    image: '/assets/images/project-4.png',
+    videoUrl: 'https://youtu.be/-krF5YuutFs?si=L2klskfSlOHE7Mg7'
+  }
+]
 
 function Home() {
   const [showContactModal, setShowContactModal] = useState(false)
+  const [showVideoModal, setShowVideoModal] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<{ title: string; videoUrl: string } | null>(null)
+
+  const handleOpenVideo = (project: { title: string; videoUrl: string }) => {
+    setSelectedProject(project)
+    setShowVideoModal(true)
+  }
+
+  const handleCloseVideo = () => {
+    setShowVideoModal(false)
+    setSelectedProject(null)
+  }
 
   return (
     <>
@@ -61,46 +97,23 @@ function Home() {
         {/* Projects Section */}
         <section className="projects">
           <div className="projects-grid">
-            <div className="project-card">
-              <img src="/assets/images/project-1.png" alt="Project 1" className="project-image" />
-              <div className="project-overlay">
-                <span className="project-tag">Photo/Video</span>
-                <div className="project-bottom">
-                  <h4 className="project-name">campain name</h4>
-                  <button className="project-button">View Project</button>
+            {homeProjects.map((project) => (
+              <div key={project.title} className="project-card">
+                <img src={project.image} alt={project.title} className="project-image" />
+                <div className="project-overlay">
+                  <span className="project-tag">Photo/Video</span>
+                  <div className="project-bottom">
+                    <h4 className="project-name">{project.title}</h4>
+                    <button
+                      className="project-button"
+                      onClick={() => handleOpenVideo(project)}
+                    >
+                      View Project
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="project-card">
-              <img src="/assets/images/project-2.png" alt="Project 2" className="project-image" />
-              <div className="project-overlay">
-                <span className="project-tag">Photo/Video</span>
-                <div className="project-bottom">
-                  <h4 className="project-name">campain name</h4>
-                  <button className="project-button">View Project</button>
-                </div>
-              </div>
-            </div>
-            <div className="project-card">
-              <img src="/assets/images/project-3.png" alt="Project 3" className="project-image" />
-              <div className="project-overlay">
-                <span className="project-tag">Photo/Video</span>
-                <div className="project-bottom">
-                  <h4 className="project-name">campain name</h4>
-                  <button className="project-button">View Project</button>
-                </div>
-              </div>
-            </div>
-            <div className="project-card">
-              <img src="/assets/images/project-4.png" alt="Project 4" className="project-image" />
-              <div className="project-overlay">
-                <span className="project-tag">Photo/Video</span>
-                <div className="project-bottom">
-                  <h4 className="project-name">campain name</h4>
-                  <button className="project-button">View Project</button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="projects-footer">
             <Link to="/work" className="view-all-title-link">
@@ -206,6 +219,14 @@ function Home() {
           </div>
         </div>
       )}
+
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={showVideoModal}
+        onClose={handleCloseVideo}
+        videoUrl={selectedProject?.videoUrl || ''}
+        title={selectedProject?.title || ''}
+      />
 
       <Footer />
     </>
