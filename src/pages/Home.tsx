@@ -23,7 +23,7 @@ const homeProjects = [
     videoUrl: 'https://youtu.be/ay8yMEFoNJw?si=PgS4L3UdYk31YYx9'
   },
   {
-    title: 'Mây Tre Đan',
+    title: 'Mây Tre Đan - Documentary',
     image: '/assets/images/project-4.png',
     videoUrl: 'https://youtu.be/-krF5YuutFs?si=L2klskfSlOHE7Mg7'
   }
